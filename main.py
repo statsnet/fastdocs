@@ -6,7 +6,6 @@ import os
 from flask import Flask
 from flask import request, jsonify
 import json
-import pythoncom
 app = Flask(__name__)
 
 
@@ -116,8 +115,6 @@ def list_of_templates():
 
 @app.route('/api/generate_documents', methods=['POST'])
 def generate():
-    #Сразу перед инициализацией DCOM в run()
-    pythoncom.CoInitialize()
     content = request.get_json()
     data = order_documents(content)
     return jsonify(data)

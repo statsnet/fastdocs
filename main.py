@@ -6,6 +6,9 @@ import os
 from flask import Flask
 from flask import request, jsonify
 import json
+import subprocess
+
+
 app = Flask(__name__)
 
 
@@ -48,7 +51,7 @@ def generate_document(filepath, variables):
 
     filename = filepath.replace('templates/', '').replace('.docx', '')
     doc.save(f'documents/{filename}.docx')
-    convert(f'documents/{filename}.docx', f'documents/{filename}.pdf', keep_active=True)
+    subprocess.check_output(['libreoffice', '--convert-to', 'pdf', f'documents/{filename}.pdf'])
     return filename + '.pdf'
 
 

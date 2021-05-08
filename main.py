@@ -51,7 +51,7 @@ def generate_document(filepath, variables):
 
     filename = filepath.replace('templates/', '').replace('.docx', '')
     doc.save(f'documents/{filename}.docx')
-    subprocess.check_output(['libreoffice', '--convert-to', 'pdf', f'documents/{filename}.pdf'])
+    subprocess.check_output(['libreoffice', '--convert-to', 'pdf', f'documents/{filename}.docx'])
     return filename + '.pdf'
 
 
